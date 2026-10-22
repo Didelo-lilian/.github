@@ -39,4 +39,4 @@ jobs:
     secrets: inherit
 ```
 
-It authenticates as the organization's release GitHub App: `RELEASE_APP_ID` (organization variable) and `RELEASE_APP_PRIVATE_KEY` (organization secret).
+It authenticates as the organization's `didelo-release` GitHub App, installed only on the repositories that publish releases. Each of them needs the `RELEASE_APP_ID` variable and the `RELEASE_APP_PRIVATE_KEY` secret.
