@@ -1,0 +1,24 @@
+name: PR conventions
+
+on:
+  workflow_call:
+
+permissions: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      # Values go through env, never ${{ }} inside run: a PR title is attacker-controlled input.
+      - name: Branch name
+        env:
+          BRANCH: ${{ github.head_ref }}
+        run: |
+          re='^([0-9]+-[a-z0-9]+(-[a-z0-9]+)*|dependabot/.+|release-please--.+)$'
+          [[ "$BRANCH" =~ $re ]] || { echo "::error::Branch '$BRANCH' must be <issue>-<slug>, e.g. 12-traefik-https"; exit 1; }
+      - name: PR title
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          re='^(feat|fix|perf|refactor|docs|test|build|ci|chore|style|revert)(\([a-z0-9._/-]+\))?!?: [^A-Z ].*[^. ]$'
+          [[ "$TITLE" =~ $re ]] || { echo "::error::PR title must be '<type>(<scope>): <summary>', lower-case summary, no trailing period. See CONTRIBUTING.md."; exit 1; }

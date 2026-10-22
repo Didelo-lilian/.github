@@ -1,0 +1,12 @@
+name: Task
+description: A feature or a piece of work.
+body:
+  - type: textarea
+    attributes:
+      label: What and why
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Done when
+      placeholder: "- [ ] ..."
