@@ -1,0 +1,26 @@
+name: Release
+
+# On every push to main, release-please keeps a release PR up to date (version bump + CHANGELOG.md).
+# Merging that PR tags vX.Y.Z and publishes the GitHub release with the generated notes.
+on:
+  workflow_call:
+    secrets:
+      RELEASE_APP_PRIVATE_KEY:
+        required: true
+
+permissions: {}
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      # A GitHub App token, not GITHUB_TOKEN: PRs opened with GITHUB_TOKEN don't trigger workflows,
+      # so the release PR would never get the status checks main requires.
+      - uses: actions/create-github-app-token@v3
+        id: app
+        with:
+          app-id: ${{ vars.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+      - uses: googleapis/release-please-action@v5
+        with:
+          token: ${{ steps.app.outputs.token }}

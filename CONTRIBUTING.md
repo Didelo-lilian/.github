@@ -48,4 +48,6 @@ Dependabot (`dependabot/…`) and release-please (`release-please--…`) branche
 
 ## Releases
 
-A release is tagged at the end of each iteration (one weekend). Versions follow SemVer as `vX.Y.Z`, and the changelog is generated from the PR titles.
+Versions follow SemVer as `vX.Y.Z` and are computed from the PR titles merged since the last release: `fix` bumps the patch, `feat` the minor, `!` the major (the minor while the version is `0.x`).
+
+[release-please](https://github.com/googleapis/release-please) keeps a release PR open and up to date with the next version and its `CHANGELOG.md`. Merging it at the end of an iteration (one weekend) tags the version and publishes the GitHub release with the generated notes. Nothing else to do by hand.
