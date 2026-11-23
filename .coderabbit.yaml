@@ -8,6 +8,7 @@ reviews:
   auto_approvals:
     enabled: true
     max_merge_risk: low
+    min_blocking_severity: major
   path_instructions:
     - path: ".github/workflows/**"
       instructions: "These reusable workflows are called by every Didelo repository: flag a changed or removed input, secret, output or job name, because it breaks all callers. Workflows triggered by pull requests must run on GitHub-hosted runners."
