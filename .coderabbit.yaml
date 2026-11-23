@@ -1,0 +1,25 @@
+reviews:
+  poem: false
+  high_level_summary_in_walkthrough: true
+  auto_review:
+    auto_pause_after_reviewed_commits: 0
+    ignore_title_keywords:
+      - "chore(main): release"
+  auto_approvals:
+    enabled: true
+    max_merge_risk: low
+  path_instructions:
+    - path: ".github/workflows/**"
+      instructions: "These reusable workflows are called by every Didelo repository: flag a changed or removed input, secret, output or job name, because it breaks all callers. Workflows triggered by pull requests must run on GitHub-hosted runners."
+    - path: "CONTRIBUTING.md"
+      instructions: "Reference for the Git flow of every Didelo repository: flag a change that no longer matches the PR title convention, the branch protection or the release flow the workflows enforce."
+knowledge_base:
+  linked_repositories:
+    - repository: Didelo-lilian/semaphore
+      instructions: "Calls the shared workflows. Flag changes that break its callers."
+    - repository: Didelo-lilian/infra
+      instructions: "Calls the shared workflows. Flag changes that break its callers."
+    - repository: Didelo-lilian/design-system
+      instructions: "Calls the shared workflows. Flag changes that break its callers."
+    - repository: Didelo-lilian/status
+      instructions: "Calls the shared workflows. Flag changes that break its callers."
